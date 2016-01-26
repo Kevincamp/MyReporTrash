@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="ReporTrash"
+        android:layout_weight="1"
+        android:textStyle="bold"
+        android:textSize="60dp"
+        android:textColor="#0b8702"
+        android:gravity="center" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:columnCount="2"
+        android:rowCount="2"
+        android:layout_weight="9"
+        android:layout_gravity="center"
+        android:focusable="true"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+        <Button
+            android:id="@+id/btn_reportar"
+            android:text="Reportar"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:background="@drawable/buttonshape"
+            android:shadowColor="#A8A8A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
+            android:layout_margin="10dp"
+            />
+        <Button
+            android:id="@+id/btn_calculate"
+            android:text="Calcular"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:background="@drawable/buttonshape"
+            android:shadowColor="#A8A8A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
+            android:layout_margin="10dp"
+            />
+        <Button
+            android:id="@+id/btn_misreportes"
+            android:text="Mis Reportes"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:background="@drawable/buttonshape"
+            android:shadowColor="#A8A8A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
+            android:layout_margin="10dp"
+            />
+        <Button
+            android:id="@+id/btn_info"
+            android:text="Informacion"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:background="@drawable/buttonshape"
+            android:shadowColor="#A8A8A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
+            android:layout_margin="10dp"
+            />
+    </LinearLayout>
+
+
+</LinearLayout>
