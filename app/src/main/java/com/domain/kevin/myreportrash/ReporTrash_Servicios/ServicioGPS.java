@@ -37,12 +37,6 @@ public class ServicioGPS extends Service implements LocationListener {
         getLocation();
     }
 
-    public String retornarPosicion(View view) {
-        String coordenada;
-        coordenada = String.format("%s,%s", latitud, longitud);
-        return coordenada;
-    }
-
     public Double getLatitud(){
         return location.getLatitude();
     }

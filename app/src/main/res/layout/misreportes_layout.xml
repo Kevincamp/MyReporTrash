@@ -12,10 +12,10 @@
         android:gravity="center_horizontal"
         android:layout_marginTop="10dp"/>
 
-    <com.google.android.gms.maps.MapView
-        android:id="@+id/mi_mapa"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/relativeLayout">
+    </RelativeLayout>
 
-    </com.google.android.gms.maps.MapView>
 </LinearLayout>

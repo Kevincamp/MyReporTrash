@@ -1,9 +1,9 @@
 package com.domain.kevin.myreportrash;
 
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -98,7 +98,7 @@ public class Profile extends AppCompatActivity
 
         if (id == R.id.nav_reportar) {
             Reportar_Fragment reportar_fragment = new Reportar_Fragment();
-            fragmentTransaction = getFragmentManager().beginTransaction();
+            fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.content_frame,reportar_fragment)
                     .addToBackStack("home").commit();
 
@@ -139,7 +139,7 @@ public class Profile extends AppCompatActivity
 
     public void loadMenu(){
             mf = new Menu_Fragment();
-            fragmentTransaction = getFragmentManager().beginTransaction();
+            fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.content_frame,mf);
             fragmentTransaction.commit();
     }

@@ -43,14 +43,14 @@ public class DBHandler extends SQLiteOpenHelper {
     }
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_USER_TABLE = "CREATE TABLE "+ TABLE_USUARIOS +
+        String CREATE_TABLES = "CREATE TABLE "+ TABLE_USUARIOS +
                 "(" + USUARIO_KEY + " INTEGER PRIMARY KEY, " +
                 USUARIO_USERNAME + " TEXT NOT NULL, "+
                 USUARIO_PASSWORD + " TEXT NOT NULL, "+
                 USUARIO_NOMBRE + " TEXT NOT NULL, "+
                 USUARIO_APELLIDO + " TEXT NOT NULL, "+
-                USUARIO_EMAIL + " TEXT NOT NULL "+")";
-        String CREATE_BASURA_TABLE = "CREATE TABLE "+ TABLE_BASURAS +
+                USUARIO_EMAIL + " TEXT NOT NULL "+");"+
+                "CREATE TABLE "+ TABLE_BASURAS +
                 "(" + BASURA_KEY + " INTEGER PRIMARY KEY, "+
                 BASURA_DETALLE + " TEXT NOT NULL, "+
                 BASURA_IMAGEN + " TEXT, "+
@@ -58,7 +58,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 BASURA_LONGUITUD + " REAL NOT NULL, "+
                 BASURA_FECHA + " DATETIME, "+
                 BASURA_USUARIO_ID + " INTEGER PREFERENCES "+ TABLE_USUARIOS + "("+USUARIO_KEY+") ON UPDATE CASCADE);";
-        db.execSQL(CREATE_USER_TABLE);
+        db.execSQL(CREATE_TABLES);
         //db.execSQL(CREATE_BASURA_TABLE);
 
     }

@@ -34,6 +34,7 @@ public class Basura implements Parcelable{
         this.imagen = imagen;
         this.latitud = latitud;
         this.longuitud = longuitud;
+        this.usuario_id = usuario_id;
     }
 
     public void setUsuario_id(int usuario_id){this.usuario_id = usuario_id;}
