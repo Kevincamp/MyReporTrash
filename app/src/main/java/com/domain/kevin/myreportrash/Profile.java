@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.domain.kevin.myreportrash.ReporTrash_clases.Usuario;
+import com.domain.kevin.myreportrash.ReporTrash_db.DBHandler;
 
 
 public class Profile extends AppCompatActivity
@@ -36,10 +37,10 @@ public class Profile extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        final DBHandler db = new DBHandler(this);
+        String username = getIntent().getStringExtra("username");
 
-
-
-        Bundle b = getIntent().getExtras();
+        //Bundle b = getIntent().getExtras();
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -53,12 +54,11 @@ public class Profile extends AppCompatActivity
 
         //navigationView.setNavigationItemSelectedListener(this);
 
-
-        usuario = b.getParcelable(MainActivity.Usuario_OBJETO);
+        usuario = db.getUsuario(username);
         loadProfile(usuario);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
-        loadMenu();
+        loadMenu(usuario);
     }
 
     @Override
@@ -137,8 +137,12 @@ public class Profile extends AppCompatActivity
         }
     }
 
-    public void loadMenu(){
+    public void loadMenu(Usuario usuario){
+            Bundle bundle = new Bundle();
+            bundle.putString("username",usuario.getUsername());
+
             mf = new Menu_Fragment();
+            mf.setArguments(bundle);
             fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.content_frame,mf);
             fragmentTransaction.commit();

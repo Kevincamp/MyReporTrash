@@ -9,17 +9,32 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.domain.kevin.myreportrash.ReporTrash_clases.Usuario;
+import com.domain.kevin.myreportrash.ReporTrash_db.DBHandler;
+
 public class Menu_Fragment extends Fragment {
 
     private Button btn_info;
     private Button btn_reportar;
     private Button btn_calcular;
     private Button btn_misreportes;
+    String username;
+    Usuario usuario;
+    Bundle bundle;
+
     private FragmentTransaction fragmentTransaction;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.menu_layout,container,false);
+        final DBHandler db = new DBHandler(this.getContext());
+
+        bundle = this.getArguments();
+        if(bundle != null){
+            username = bundle.getString("username", "Administrador");
+            usuario = db.getUsuario(username);
+
+        }
 
         getActivity().setTitle("ReporTrasH");
 
@@ -27,7 +42,12 @@ public class Menu_Fragment extends Fragment {
         btn_reportar.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                Bundle bundleReport = new Bundle();
+                bundleReport.putString("username", usuario.getUsername());
+
                 Reportar_Fragment reportar_fragment = new Reportar_Fragment();
+                reportar_fragment.setArguments(bundleReport);
+
                 fragmentTransaction = getFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.content_frame,reportar_fragment)
                         .addToBackStack("home").commit();
@@ -62,7 +82,12 @@ public class Menu_Fragment extends Fragment {
         btn_misreportes.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                Bundle bundleMisReportes = new Bundle();
+                bundleMisReportes.putString("username", usuario.getUsername());
+
                 MisReportes_Fragment misReportes_fragment = new MisReportes_Fragment();
+                misReportes_fragment.setArguments(bundleMisReportes);
+
                 fragmentTransaction = getFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.content_frame,misReportes_fragment)
                         .addToBackStack("home").commit();

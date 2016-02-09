@@ -26,6 +26,7 @@ import android.widget.Toast;
 
 import com.domain.kevin.myreportrash.ReporTrash_Servicios.ServicioGPS;
 import com.domain.kevin.myreportrash.ReporTrash_clases.Basura;
+import com.domain.kevin.myreportrash.ReporTrash_clases.Usuario;
 import com.domain.kevin.myreportrash.ReporTrash_db.DBHandler;
 
 import java.io.File;
@@ -41,7 +42,8 @@ public class Reportar_Fragment extends Fragment implements LocationListener{
     private Button btn_reportar;
     private TextView txt_direccion, txt_detalle;
 
-
+    private Usuario usuario;
+    String username;
     private ImageView imageView;
     String foto;
     private Bitmap bmp;
@@ -75,6 +77,18 @@ public class Reportar_Fragment extends Fragment implements LocationListener{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.reportar_layout,container,false);
+
+        final DBHandler db = new DBHandler(getActivity().getApplicationContext());
+
+        init_location_manager();
+
+        Bundle bundle = this.getArguments();
+        if(bundle != null){
+            username = bundle.getString("username", "DEFAULT_USER_NAME");
+        }
+        usuario = db.getUsuario(username);
+
+
         getActivity().setTitle("Reportar Basura");
         imageView = (ImageView)view.findViewById(R.id.imagen);
         btn_capturar = (ImageButton)view.findViewById(R.id.btn_capturar);
@@ -82,7 +96,6 @@ public class Reportar_Fragment extends Fragment implements LocationListener{
         txt_direccion = (TextView)view.findViewById(R.id.txt_direccion);
         txt_detalle = (TextView)view.findViewById(R.id.txt_detalle);
 
-        final DBHandler db = new DBHandler(getActivity().getApplicationContext());
 
         btn_capturar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,14 +112,12 @@ public class Reportar_Fragment extends Fragment implements LocationListener{
                     Toast.makeText(getActivity().getApplicationContext(), "Faltan Campos por Ingresar.", Toast.LENGTH_LONG).show();
 
                 } else {
-                    init_location_manager();
-
                     db.addBasura(new Basura(txt_direccion.getText().toString(),
                             txt_detalle.getText().toString(),
                             foto,
                             (double) location.getLatitude(),
                             (double) location.getLongitude(),
-                            1));
+                            usuario.getId()));
 
                     Toast.makeText(getActivity().getApplicationContext(), "Basura Reportada.", Toast.LENGTH_LONG).show();
                 }

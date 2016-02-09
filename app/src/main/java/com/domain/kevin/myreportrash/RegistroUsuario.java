@@ -57,4 +57,12 @@ public class RegistroUsuario extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        intent = new Intent(RegistroUsuario.this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
 }

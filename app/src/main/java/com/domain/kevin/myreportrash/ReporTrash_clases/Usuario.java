@@ -31,7 +31,7 @@ public class Usuario implements Parcelable
         this.apellido = apellido;
         this.email = email;
     }
-
+    public int getId(){return id;}
     public void setUsername(String username){
         this.username = username;
     }

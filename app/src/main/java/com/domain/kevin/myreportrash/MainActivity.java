@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
                     usuario = db.getUsuario(username);
                     if(usuario != null && usuario.getPassword().contentEquals(password)){
                         intent = new Intent(MainActivity.this, Profile.class);
-                        intent.putExtra(Usuario_OBJETO, usuario);
+                        intent.putExtra("username",usuario.getUsername().toString());
                         startActivity(intent);
                         finish();
                     }
