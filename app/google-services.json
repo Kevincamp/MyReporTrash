@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_id": "maps-en-android-1167",
+    "project_number": "61164498599",
+    "name": "Maps en Android"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:61164498599:android:fbd7c0a0c6457f43",
+        "client_id": "android:com.domain.kevin.myreportrash",
+        "client_type": 1,
+        "android_client_info": {
+          "package_name": "com.domain.kevin.myreportrash"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "61164498599-m8hv9htgkfl3d0j4da82aia4jb5o8dvr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.domain.kevin.myreportrash",
+            "certificate_hash": "3582727A4400DEFD3BC2E4E526DEF71C1DEC6853"
+          }
+        },
+        {
+          "client_id": "61164498599-fk6mc0b4sdlr2t1734bbt20i54bn0pum.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "cloud_messaging_service": {
+          "status": 1,
+          "apns_config": []
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "google_signin_service": {
+          "status": 2
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "client_info": [],
+  "ARTIFACT_VERSION": "1"
+}

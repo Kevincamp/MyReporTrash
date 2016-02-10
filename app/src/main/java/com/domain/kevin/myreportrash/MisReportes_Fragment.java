@@ -2,6 +2,7 @@ package com.domain.kevin.myreportrash;
 
 import android.Manifest;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -55,9 +56,17 @@ public class MisReportes_Fragment extends android.support.v4.app.Fragment {
         }
 
         googleMap = fragment.getMap();
+        googleMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+
+        //googleMap.addMarker(new MarkerOptions().position(new LatLng(0.0,00))
+        //.title("Basura 1"));
+
+
     }
 
-        @Override
+
+
+    @Override
         public void onResume() {
             super.onResume();
         }

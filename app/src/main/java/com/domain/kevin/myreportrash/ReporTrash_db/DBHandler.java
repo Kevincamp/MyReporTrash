@@ -33,10 +33,10 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String BASURA_DIRECCION = "direccion";
     private static final String BASURA_DETALLE = "detalle";
     private static final String BASURA_IMAGEN = "imagen";
-    private static final String BASURA_USUARIO_ID = "userid";
-    private static final String BASURA_LATITUD = "0.0";
-    private static final String BASURA_LONGUITUD = "0.0";
-    private static final String BASURA_FECHA = null;
+    private static final Double BASURA_LATITUD = 0.0;
+    private static final Double BASURA_LONGUITUD = 0.0;
+    private static final String BASURA_USUARIO_ID = "id";
+    //private static final String BASURA_FECHA = null;
     public DBHandler(Context context){
         super(context,DATABASE_NAME, null, DATABASE_VERSION);
 
@@ -52,11 +52,12 @@ public class DBHandler extends SQLiteOpenHelper {
                 USUARIO_EMAIL + " TEXT NOT NULL "+");"+
                 "CREATE TABLE "+ TABLE_BASURAS +
                 "(" + BASURA_KEY + " INTEGER PRIMARY KEY, "+
+                BASURA_DIRECCION + " TEXT NOT NULL, "+
                 BASURA_DETALLE + " TEXT NOT NULL, "+
                 BASURA_IMAGEN + " TEXT, "+
                 BASURA_LATITUD + " REAL NOT NULL, "+
                 BASURA_LONGUITUD + " REAL NOT NULL, "+
-                BASURA_FECHA + " DATETIME, "+
+                //BASURA_FECHA + " DATETIME, "+
                 BASURA_USUARIO_ID + " INTEGER PREFERENCES "+ TABLE_USUARIOS + "("+USUARIO_KEY+") ON UPDATE CASCADE);";
         db.execSQL(CREATE_TABLES);
         //db.execSQL(CREATE_BASURA_TABLE);
@@ -114,11 +115,9 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(BASURA_DIRECCION, basura.getDireccion());
         values.put(BASURA_DETALLE, basura.getDetalle());
         values.put(BASURA_IMAGEN, basura.getImagen());
-        values.put(BASURA_LATITUD, basura.getLatitud().toString());
-        values.put(BASURA_LONGUITUD, basura.getLonguitud().toString());
+        values.put(BASURA_LATITUD.toString(),basura.getLatitud());
+        values.put(BASURA_LONGUITUD.toString(), basura.getLonguitud());
         values.put(BASURA_USUARIO_ID,basura.getUsuario_id());
-        values.put(BASURA_FECHA,getDateTime());
-
         db.insert(TABLE_BASURAS, null, values);
         db.close();
     }
@@ -131,8 +130,8 @@ public class DBHandler extends SQLiteOpenHelper {
                 BASURA_DIRECCION,
                 BASURA_DETALLE,
                 BASURA_IMAGEN,
-                BASURA_LATITUD,
-                BASURA_LONGUITUD,
+                BASURA_LATITUD.toString(),
+                BASURA_LONGUITUD.toString(),
                 BASURA_USUARIO_ID
         }, BASURA_KEY + "=?", new String[]{id},null,null,null,null);
         if(cursor != null){

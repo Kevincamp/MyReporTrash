@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.hardware.SensorManager;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
@@ -24,7 +25,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.domain.kevin.myreportrash.ReporTrash_Servicios.ServicioGPS;
 import com.domain.kevin.myreportrash.ReporTrash_clases.Basura;
 import com.domain.kevin.myreportrash.ReporTrash_clases.Usuario;
 import com.domain.kevin.myreportrash.ReporTrash_db.DBHandler;
@@ -45,7 +45,7 @@ public class Reportar_Fragment extends Fragment implements LocationListener{
     private Usuario usuario;
     String username;
     private ImageView imageView;
-    String foto;
+    String foto = "";
     private Bitmap bmp;
     static Uri capturedImageUri = null;
     public static final int CAMERA_REQUEST = 0;
@@ -54,6 +54,7 @@ public class Reportar_Fragment extends Fragment implements LocationListener{
     LocationManager mLocationManager;
     double lat ;
     double longi ;
+    private SensorManager mSensorManager;
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -77,25 +78,24 @@ public class Reportar_Fragment extends Fragment implements LocationListener{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.reportar_layout,container,false);
-
         final DBHandler db = new DBHandler(getActivity().getApplicationContext());
-
-        init_location_manager();
-
-        Bundle bundle = this.getArguments();
-        if(bundle != null){
-            username = bundle.getString("username", "DEFAULT_USER_NAME");
-        }
-        usuario = db.getUsuario(username);
-
-
         getActivity().setTitle("Reportar Basura");
+
         imageView = (ImageView)view.findViewById(R.id.imagen);
         btn_capturar = (ImageButton)view.findViewById(R.id.btn_capturar);
         btn_reportar = (Button)view.findViewById(R.id.btn_reportar);
         txt_direccion = (TextView)view.findViewById(R.id.txt_direccion);
         txt_detalle = (TextView)view.findViewById(R.id.txt_detalle);
 
+        mSensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
+        this.init_location_manager();
+        init_location();
+
+        Bundle bundle = this.getArguments();
+        if(bundle != null){
+            username = bundle.getString("username", "DEFAULT_USER_NAME");
+        }
+        usuario = db.getUsuario(username);
 
         btn_capturar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,8 +115,8 @@ public class Reportar_Fragment extends Fragment implements LocationListener{
                     db.addBasura(new Basura(txt_direccion.getText().toString(),
                             txt_detalle.getText().toString(),
                             foto,
-                            (double) location.getLatitude(),
-                            (double) location.getLongitude(),
+                            location.getLatitude(),
+                            location.getLongitude(),
                             usuario.getId()));
 
                     Toast.makeText(getActivity().getApplicationContext(), "Basura Reportada.", Toast.LENGTH_LONG).show();
@@ -237,5 +237,11 @@ public class Reportar_Fragment extends Fragment implements LocationListener{
     @Override
     public void onProviderDisabled(String provider) {
 
+    }
+
+    public void init_location(){
+        this.location = new Location("");
+        this.location.setLatitude(this.lat);
+        this.location.setLongitude(this.longi);
     }
 }

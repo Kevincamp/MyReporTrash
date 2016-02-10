@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                 }catch (Exception e){
                     Toast.makeText(getApplicationContext(), "Usuario no Existe.",
                             Toast.LENGTH_SHORT).show();
-                };
+                }
 
             }
         });

@@ -18,15 +18,16 @@ public class Basura implements Parcelable{
 
     }
 
-    public Basura(int basuraid, String direccion, String detalle, String imagen, Double latitud, Double longuitud,int usuario_id){
-        this.id = basuraid;
-        this.usuario_id = usuario_id;
+    public Basura(int id, String direccion, String detalle, String imagen, Double latitud, Double longuitud,int usuario_id){
+        this.id = id;
         this.direccion = direccion;
         this.detalle = detalle;
         this.imagen = imagen;
         this.latitud = latitud;
         this.longuitud = longuitud;
+        this.usuario_id = usuario_id;
     }
+
     public Basura(String direccion, String detalle, String imagen, Double latitud, Double longuitud,int usuario_id){
         this.usuario_id = usuario_id;
         this.direccion = direccion;
