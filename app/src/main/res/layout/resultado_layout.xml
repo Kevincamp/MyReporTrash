@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,8 +24,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="7.0 "
-            android:textSize="20dp"
+            android:id="@+id/resultado_value"
+            android:textSize="18dp"
             android:layout_margin="20dp"
             android:layout_weight="2"
             android:textColor="#000000"
@@ -45,8 +49,15 @@
         android:layout_margin="10dp"
         android:layout_weight="2"
         android:textColor="#184F15"
-        android:textSize="18dp"
+        android:textSize="16dp"
         android:textStyle="bold"
-        android:text="EN COMPARACIÓN, LA HUELLA ECOLOGICA PROMEDIO EN SU PAÍS ES DE 4.7 HECTAREAS GLOBALES. EN EL MUNDO ENTERO EXISTEN 1.8 DE ÁREA BIOLOGICAMENTE PRODUCTIVA PARA HECTAREAS GLOBALES PARA CADA PERSONA. SI TODOS LOS HABITANTES DEL MUNDO VIVIERAN COMO USTED NECESITARIAMOS 1.3 PLANETAS. "/>
+        android:text="La Huella Ecológica del Ecuador per cápita es de 2,30 hectáreas globales.
+La Biocapacidad del Ecuador per cápita: 2,16 hectáreas globales.
 
-</LinearLayout>
+Consejos para reducir la huella ecológica
+    – Consume con moderación.
+    – Cambia las bombillas y electrodomésticos por otros de bajo consumo.
+    – No malgastes el agua.
+    – Recicla todo lo que puedas .. Hay que recordar ir siempre provisto de bolsas para las compras."/>
+    </LinearLayout>
+</ScrollView>

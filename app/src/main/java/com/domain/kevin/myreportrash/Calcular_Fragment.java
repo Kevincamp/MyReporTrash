@@ -17,7 +17,7 @@ import com.domain.kevin.myreportrash.ReporTrash_clases.HuellaEcologica;
 public class Calcular_Fragment extends Fragment {
     private Button btn_resultado;
     private TextView txt_comida, txt_movilidad, txt_agua, txt_electricidad;
-    private int comida_value, movilidad_value, agua_value, electricidad_value;
+    private Double comida_value, movilidad_value, agua_value, electricidad_value;
     public HuellaEcologica huellaEcologica;
     private FragmentTransaction fragmentTransaction;
 
@@ -36,15 +36,15 @@ public class Calcular_Fragment extends Fragment {
         btn_resultado.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                comida_value = Integer.parseInt(txt_comida.getText().toString());
-                movilidad_value = Integer.parseInt(txt_movilidad.getText().toString());
-                agua_value = Integer.parseInt(txt_agua.getText().toString());
-                electricidad_value = Integer.parseInt(txt_electricidad.getText().toString());
+                comida_value = Double.parseDouble(txt_comida.getText().toString());
+                movilidad_value = Double.parseDouble(txt_movilidad.getText().toString());
+                agua_value = Double.parseDouble(txt_agua.getText().toString());
+                electricidad_value = Double.parseDouble(txt_electricidad.getText().toString());
 
-                comida_value = (int)(comida_value * 58.5);
-                movilidad_value = (movilidad_value * 4800);
-                agua_value = (agua_value * 59760);
-                electricidad_value = (electricidad_value * 1219);
+                comida_value = (comida_value / 58.5);
+                movilidad_value = (movilidad_value / 4800);
+                agua_value = (agua_value / 59760);
+                electricidad_value = (electricidad_value / 1219);
 
                 huellaEcologica = new HuellaEcologica(comida_value,movilidad_value,agua_value,electricidad_value);
 

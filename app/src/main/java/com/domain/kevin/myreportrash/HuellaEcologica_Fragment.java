@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import com.domain.kevin.myreportrash.ReporTrash_clases.HuellaEcologica;
 
+import java.text.DecimalFormat;
+
 /**
  * Created by kevin on 2/8/16.
  */
@@ -17,33 +19,33 @@ public class HuellaEcologica_Fragment extends android.support.v4.app.Fragment {
     private TextView movilidad_resultado;
     private TextView agua_resultado;
     private TextView electricidad_resultado;
+    private TextView resultado_value;
     private HuellaEcologica huellaEcologica;
 
-    Integer comida,movilidad,agua,electricidad;
+    Double comida,movilidad,agua,electricidad, total;
+
+    private static DecimalFormat REAL_FORMATTER = new DecimalFormat("0.###");
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.huellaecologica_layout,container,false);
+        View view = inflater.inflate(R.layout.resultado_layout,container,false);
+
+        getActivity().setTitle("Calculo de Huella Ecologica.");
 
         Bundle bundle = this.getArguments();
         if(bundle != null){
             huellaEcologica = bundle.getParcelable("HuellaEcologica");
         }
-
-        comida_resultado = (TextView)view.findViewById(R.id.comida_resultado);
-        movilidad_resultado = (TextView)view.findViewById(R.id.movilidad_resultado);
-        agua_resultado = (TextView)view.findViewById(R.id.agua_resultado);
-        electricidad_resultado = (TextView)view.findViewById(R.id.electricidad_resultado);
+        resultado_value = (TextView)view.findViewById(R.id.resultado_value);
 
         comida = huellaEcologica.getComida();
         movilidad = huellaEcologica.getMovilidad();
         agua = huellaEcologica.getAgua();
         electricidad = huellaEcologica.getElectricidad();
+        total = comida + movilidad + agua + electricidad;
 
-        comida_resultado.setText(comida.toString());
-        movilidad_resultado.setText(movilidad.toString());
-        agua_resultado.setText(agua.toString());
-        electricidad_resultado.setText(electricidad.toString());
+
+        resultado_value.setText(REAL_FORMATTER.format(total));
 
         return view;
     }
