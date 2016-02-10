@@ -85,11 +85,11 @@ public class Menu_Fragment extends Fragment {
                 Bundle bundleMisReportes = new Bundle();
                 bundleMisReportes.putString("username", usuario.getUsername());
 
-                MisReportes_Fragment misReportes_fragment = new MisReportes_Fragment();
-                misReportes_fragment.setArguments(bundleMisReportes);
+                MisReportes2_Fragment misReportes2_fragment = new MisReportes2_Fragment();
+                misReportes2_fragment.setArguments(bundleMisReportes);
 
                 fragmentTransaction = getFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.content_frame,misReportes_fragment)
+                fragmentTransaction.replace(R.id.content_frame,misReportes2_fragment)
                         .addToBackStack("home").commit();
             }
         });

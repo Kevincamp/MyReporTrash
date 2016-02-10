@@ -10,6 +10,7 @@ import com.domain.kevin.myreportrash.ReporTrash_clases.Basura;
 import com.domain.kevin.myreportrash.ReporTrash_clases.Usuario;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -166,6 +167,27 @@ public class DBHandler extends SQLiteOpenHelper {
                     Integer.parseInt(cursor.getString(6))); //UsuarioID
         }
         return contact;
+    }
+
+    public ArrayList<Basura> selectAllBasura(int userID){
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        ArrayList<Basura> list = new ArrayList<Basura>();
+        Cursor cursor = db.query(TABLE_BASURAS,
+                null,
+                BASURA_USUARIO_ID +"=?",
+                new String[] {Integer.toString(userID)},
+                null,null,null);
+        if(cursor.moveToFirst()){
+            do{
+            Basura basura = new Basura(cursor.getInt(0),cursor.getString(1), cursor.getString(2),cursor.getString(3),cursor.getInt(4));
+            list.add(basura);
+            }while(cursor.moveToNext());
+        }
+        if(cursor != null && cursor.isClosed()){
+            cursor.close();
+        }
+        return list;
     }
 
     private String getDateTime() {
