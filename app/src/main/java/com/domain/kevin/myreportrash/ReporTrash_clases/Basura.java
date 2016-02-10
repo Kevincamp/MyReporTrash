@@ -9,8 +9,8 @@ public class Basura implements Parcelable{
     protected String direccion;
     protected String detalle;
     protected String imagen;
-    protected Double latitud;
-    protected Double longuitud;
+    //protected Double latitud;
+    //protected Double longuitud;
     protected String fecha;
     protected int usuario_id;
 
@@ -18,23 +18,23 @@ public class Basura implements Parcelable{
 
     }
 
-    public Basura(int id, String direccion, String detalle, String imagen, Double latitud, Double longuitud,int usuario_id){
+    public Basura(int id, String direccion, String detalle, String imagen,int usuario_id){
         this.id = id;
         this.direccion = direccion;
         this.detalle = detalle;
         this.imagen = imagen;
-        this.latitud = latitud;
-        this.longuitud = longuitud;
+        //this.latitud = latitud;
+        //this.longuitud = longuitud;
         this.usuario_id = usuario_id;
     }
 
-    public Basura(String direccion, String detalle, String imagen, Double latitud, Double longuitud,int usuario_id){
+    public Basura(String direccion, String detalle, String imagen,int usuario_id){
         this.usuario_id = usuario_id;
         this.direccion = direccion;
         this.detalle = detalle;
         this.imagen = imagen;
-        this.latitud = latitud;
-        this.longuitud = longuitud;
+        //this.latitud = latitud;
+        //this.longuitud = longuitud;
         this.usuario_id = usuario_id;
     }
 
@@ -50,13 +50,11 @@ public class Basura implements Parcelable{
     public void setImagen(String imagen){this.imagen = imagen;}
     public String getImagen(){return imagen;}
 
-    public void setLatitud(Double latitud){this.latitud = latitud;}
+    /*public void setLatitud(Double latitud){this.latitud = latitud;}
     public Double getLatitud(){return latitud;}
 
     public void setLonguitud(Double longuitud){this.longuitud = longuitud;}
-    public Double getLonguitud(){return longuitud;}
-
-    public String getFecha(){return fecha;}
+    public Double getLonguitud(){return longuitud;}*/
 
     @Override
     public int describeContents() { return 0; }
@@ -67,8 +65,8 @@ public class Basura implements Parcelable{
         dest.writeString(this.direccion);
         dest.writeString(this.detalle);
         dest.writeString(this.imagen);
-        dest.writeDouble(this.latitud);
-        dest.writeDouble(this.longuitud);
+        //dest.writeDouble(this.latitud);
+        //dest.writeDouble(this.longuitud);
         dest.writeInt(this.usuario_id);
     }
 
@@ -77,8 +75,8 @@ public class Basura implements Parcelable{
         this.direccion = in.readString();
         this.detalle = in.readString();
         this.imagen = in.readString();
-        this.latitud = in.readDouble();
-        this.longuitud = in.readDouble();
+        //this.latitud = in.readDouble();
+        //this.longuitud = in.readDouble();
         this.usuario_id = in.readInt();
     }
 

@@ -16,7 +16,7 @@ import java.util.Locale;
 
 public class DBHandler extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 3;
     private static final String DATABASE_NAME = "ReporTrashDB1";
     // Nombres de Tablas
     private static final String TABLE_USUARIOS = "usuariosInfo";
@@ -33,9 +33,9 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String BASURA_DIRECCION = "direccion";
     private static final String BASURA_DETALLE = "detalle";
     private static final String BASURA_IMAGEN = "imagen";
-    private static final Double BASURA_LATITUD = 0.0;
-    private static final Double BASURA_LONGUITUD = 0.0;
-    private static final String BASURA_USUARIO_ID = "id";
+    //private static final Double BASURA_LATITUD = 0.0;
+    //private static final Double BASURA_LONGUITUD = 0.0;
+    private static final String BASURA_USUARIO_ID = "usuarioId";
     //private static final String BASURA_FECHA = null;
     public DBHandler(Context context){
         super(context,DATABASE_NAME, null, DATABASE_VERSION);
@@ -43,24 +43,22 @@ public class DBHandler extends SQLiteOpenHelper {
     }
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_TABLES = "CREATE TABLE "+ TABLE_USUARIOS +
+        String CREATE_USUARIO_TABLE = "CREATE TABLE "+ TABLE_USUARIOS +
                 "(" + USUARIO_KEY + " INTEGER PRIMARY KEY, " +
                 USUARIO_USERNAME + " TEXT NOT NULL, "+
                 USUARIO_PASSWORD + " TEXT NOT NULL, "+
                 USUARIO_NOMBRE + " TEXT NOT NULL, "+
                 USUARIO_APELLIDO + " TEXT NOT NULL, "+
-                USUARIO_EMAIL + " TEXT NOT NULL "+");"+
-                "CREATE TABLE "+ TABLE_BASURAS +
+                USUARIO_EMAIL + " TEXT NOT NULL "+");";
+        String CREATE_BASURA_TABLE =  "CREATE TABLE "+ TABLE_BASURAS +
                 "(" + BASURA_KEY + " INTEGER PRIMARY KEY, "+
                 BASURA_DIRECCION + " TEXT NOT NULL, "+
                 BASURA_DETALLE + " TEXT NOT NULL, "+
                 BASURA_IMAGEN + " TEXT, "+
-                BASURA_LATITUD + " REAL NOT NULL, "+
-                BASURA_LONGUITUD + " REAL NOT NULL, "+
-                //BASURA_FECHA + " DATETIME, "+
-                BASURA_USUARIO_ID + " INTEGER PREFERENCES "+ TABLE_USUARIOS + "("+USUARIO_KEY+") ON UPDATE CASCADE);";
-        db.execSQL(CREATE_TABLES);
-        //db.execSQL(CREATE_BASURA_TABLE);
+                BASURA_USUARIO_ID + " INTEGER, "+
+                "FOREIGN KEY ("+BASURA_USUARIO_ID+") REFERENCES "+TABLE_USUARIOS+" ("+USUARIO_KEY+"));";
+        db.execSQL(CREATE_USUARIO_TABLE);
+        db.execSQL(CREATE_BASURA_TABLE);
 
     }
 
@@ -115,8 +113,6 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(BASURA_DIRECCION, basura.getDireccion());
         values.put(BASURA_DETALLE, basura.getDetalle());
         values.put(BASURA_IMAGEN, basura.getImagen());
-        values.put(BASURA_LATITUD.toString(),basura.getLatitud());
-        values.put(BASURA_LONGUITUD.toString(), basura.getLonguitud());
         values.put(BASURA_USUARIO_ID,basura.getUsuario_id());
         db.insert(TABLE_BASURAS, null, values);
         db.close();
@@ -130,8 +126,8 @@ public class DBHandler extends SQLiteOpenHelper {
                 BASURA_DIRECCION,
                 BASURA_DETALLE,
                 BASURA_IMAGEN,
-                BASURA_LATITUD.toString(),
-                BASURA_LONGUITUD.toString(),
+                //BASURA_LATITUD.toString(),
+                //BASURA_LONGUITUD.toString(),
                 BASURA_USUARIO_ID
         }, BASURA_KEY + "=?", new String[]{id},null,null,null,null);
         if(cursor != null){
@@ -140,8 +136,33 @@ public class DBHandler extends SQLiteOpenHelper {
                     cursor.getString(1), // Direccion
                     cursor.getString(2), //Detalle
                     cursor.getString(3), //Imagen
-                    Double.parseDouble(cursor.getString(4)), //Latitud
-                    Double.parseDouble(cursor.getString(5)), //Longitud
+                    //Double.parseDouble(cursor.getString(4)), //Latitud
+                    //Double.parseDouble(cursor.getString(5)), //Longitud
+                    Integer.parseInt(cursor.getString(6))); //UsuarioID
+        }
+        return contact;
+    }
+
+    public Basura getBasuraByUserID(String id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Basura contact = new Basura();
+        Cursor cursor = db.query(TABLE_BASURAS, new String[]{
+                BASURA_KEY,
+                BASURA_DIRECCION,
+                BASURA_DETALLE,
+                BASURA_IMAGEN,
+                //BASURA_LATITUD.toString(),
+                //BASURA_LONGUITUD.toString(),
+                BASURA_USUARIO_ID
+        }, BASURA_USUARIO_ID + "=?", new String[]{id},null,null,null,null);
+        if(cursor != null){
+            cursor.moveToFirst();
+            contact = new Basura(Integer.parseInt(cursor.getString(0)),//idBasura
+                    cursor.getString(1), // Direccion
+                    cursor.getString(2), //Detalle
+                    cursor.getString(3), //Imagen
+                    //Double.parseDouble(cursor.getString(4)), //Latitud
+                    //Double.parseDouble(cursor.getString(5)), //Longitud
                     Integer.parseInt(cursor.getString(6))); //UsuarioID
         }
         return contact;

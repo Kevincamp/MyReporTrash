@@ -87,9 +87,9 @@ public class Reportar_Fragment extends Fragment implements LocationListener{
         txt_direccion = (TextView)view.findViewById(R.id.txt_direccion);
         txt_detalle = (TextView)view.findViewById(R.id.txt_detalle);
 
-        mSensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
-        this.init_location_manager();
-        init_location();
+        //mSensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
+        //this.init_location_manager();
+        //init_location();
 
         Bundle bundle = this.getArguments();
         if(bundle != null){
@@ -112,13 +112,8 @@ public class Reportar_Fragment extends Fragment implements LocationListener{
                     Toast.makeText(getActivity().getApplicationContext(), "Faltan Campos por Ingresar.", Toast.LENGTH_LONG).show();
 
                 } else {
-                    db.addBasura(new Basura(txt_direccion.getText().toString(),
-                            txt_detalle.getText().toString(),
-                            foto,
-                            location.getLatitude(),
-                            location.getLongitude(),
-                            usuario.getId()));
-
+                    Basura basura = new Basura(txt_direccion.getText().toString(),txt_detalle.getText().toString(),foto,usuario.getId());
+                    db.addBasura(basura);
                     Toast.makeText(getActivity().getApplicationContext(), "Basura Reportada.", Toast.LENGTH_LONG).show();
                 }
             }
